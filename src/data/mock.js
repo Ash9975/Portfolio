@@ -26,7 +26,7 @@ export const projectsData = [
     image:
       "https://images.unsplash.com/photo-1557821552-17105176677c?w=600&q=80",
     color: "#E23636",
-    link: "https://your-portfolio-link.com",
+    link: "https://portfolio-hbfuti0v8-ashishs-projects-428732e9.vercel.app",
     status: "Completed",
   },
   {
