@@ -42,7 +42,7 @@ const Hero = () => {
         <div className="hero-badge">Ashish Pimpalshende</div>
 
         <h1 className="hero-title">
-          <span className="hero-title-line">FULL STACK DEVELOPER </span>
+          <span className="hero-title-line">FRONTEND DEVELOPER </span>
           <span className="hero-title-line highlight">WITH A FOCUS ON UI</span>
         </h1>
 
