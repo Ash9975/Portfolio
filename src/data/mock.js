@@ -1,8 +1,8 @@
 import heroimage from '../assets/ProfilePic.jpeg'
 export const heroData = {
   name: "ASHISH PIMPALSHENDE",
-  title: "Full Stack Developer",
-  tagline: "I build clean, user-focused web applications while continuously improving my full-stack skills.",
+  title: "MERN STACK DEVELOPER",
+  tagline: "I design and develop full-stack applications using MongoDB, Express, React, and Node.js, focusing on performance, clean architecture, and seamless user experience.",
   image: heroimage
 };
 
@@ -31,12 +31,12 @@ export const projectsData = [
   },
   {
     id: 2,
-    title: "UrbanRide",
+    title: "UrbanRide – Ride Booking Platform",
     description:
-      "A ride-booking web application that allows users to book rides, manage trips, and view ride details.",
-    technologies: ["React", "Node.js", "MongoDB", "Express"],
+      "A full-stack ride-booking application that enables users to book rides, track trip details, and manage ride history. Built with scalable backend APIs and a responsive frontend for smooth user experience.",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "JWT"],
     image:
-      "https://images.unsplash.com/photo-1518441902113-f4bb1dc47e03?w=600&q=80",
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600&q=80",
     color: "#3498DB",
     link: "https://github.com/yourusername/urbanride",
     status: "Completed",
@@ -54,8 +54,6 @@ export const projectsData = [
     status: "Completed",
   },
 
-  // 🚧 In Progress Projects (Discussed / Planned)
-
   {
     id: 4,
     title: "Ayurvedic Medicine Recommendation System",
@@ -65,11 +63,23 @@ export const projectsData = [
     image:
       "https://images.unsplash.com/photo-1514733670139-4d87a1941d55?w=600&q=80",
     color: "#2ECC71",
-    link: "#",
+    link: " https://ayurvedic-herbs-recommendation-and.onrender.com",
     status: "In Progress",
   },
   {
     id: 5,
+    title: "ReelBite - Food Discovery Platform",
+    description:
+      "A reels-based food discovery web app where users can explore dishes through short videos, view restaurant details, and interact with dynamic content in real-time.",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "JWT", "Cloudinary"],
+    image:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80",
+    color: "#E67E22",
+    link: "#",
+    status: "In Progress",
+  },
+  {
+    id: 6,
     title: "Video Streaming Platform",
     description:
       "A Netflix-style video streaming platform with user authentication, content management, and streaming optimization.",
@@ -80,36 +90,25 @@ export const projectsData = [
     link: "#",
     status: "In Progress",
   },
-  {
-    id: 6,
-    title: "Real-Time Chat Application",
-    description:
-      "A real-time chat application supporting private and group chats using WebSocket-based communication.",
-    technologies: ["React", "Socket.io", "MongoDB"],
-    image:
-      "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=600&q=80",
-    color: "#16A085",
-    link: "#",
-    status: "In Progress",
-  },
+
 ];
 
 
-    export const skillsData = [
-      { name: "React", icon: "Code2" },
-      { name: "HTML & CSS", icon: "Code" },
-      { name: "Node.js", icon: "Server" },
-      { name: "Express.js", icon: "ServerCog" },
-      { name: "MongoDB", icon: "Database" },
-      { name: "Python", icon: "Terminal" },
-      { name: "REST APIs", icon: "Network" },
-      { name: "Git & GitHub", icon: "GitBranch" },
-    ];
+export const skillsData = [
+  { name: "React", icon: "Code2" },
+  { name: "HTML & CSS", icon: "Code" },
+  { name: "Node.js", icon: "Server" },
+  { name: "Express.js", icon: "ServerCog" },
+  { name: "MongoDB", icon: "Database" },
+  { name: "Python", icon: "Terminal" },
+  { name: "REST APIs", icon: "Network" },
+  { name: "Git & GitHub", icon: "GitBranch" },
+];
 
 
-    export const contactData = {
-      email: "ash.pimpalshende@gmail.com",
-      github: "https://github.com/Ash9975",
-      linkedin: "https://www.linkedin.com/in/ashish-pimpalshende",
-      instagram: "https://www.instagram.com/aashish___21_"
-    };
+export const contactData = {
+  email: "ash.pimpalshende@gmail.com",
+  github: "https://github.com/Ash9975",
+  linkedin: "https://www.linkedin.com/in/ashish-pimpalshende",
+  instagram: "https://www.instagram.com/aashish___21_"
+};

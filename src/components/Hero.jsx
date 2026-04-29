@@ -42,8 +42,8 @@ const Hero = () => {
         <div className="hero-badge">Ashish Pimpalshende</div>
 
         <h1 className="hero-title">
-          <span className="hero-title-line">FRONTEND DEVELOPER </span>
-          <span className="hero-title-line highlight">WITH A FOCUS ON UI</span>
+          <span className="hero-title-line">MERN STACK DEVELOPER </span>
+          <span className="hero-title-line highlight">BUILDING SCALABLE WEB APPS</span>
         </h1>
 
         <p className="hero-subtitle">
