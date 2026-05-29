@@ -4,7 +4,7 @@ A modern, responsive personal portfolio website built to showcase my projects, s
 This portfolio includes **completed projects** as well as **projects currently in progress**, reflecting my ongoing learning and development.
 
 🔗 **Live Website:**  
-https://portfolio-hbfuti0v8-ashishs-projects-428732e9.vercel.app  
+https://portfolio-ashishs-projects-428732e9.vercel.app  
 *(Deployed on Vercel)*
 
 ---
