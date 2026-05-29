@@ -1,0 +1,42 @@
+```
+└── 📁frontend
+    └── 📁public
+        ├── vite.svg
+    └── 📁src
+        └── 📁assets
+            ├── ProfilePic.jpeg
+        └── 📁components
+            ├── About.css
+            ├── About.jsx
+            ├── Contact.css
+            ├── Contact.jsx
+            ├── Footer.css
+            ├── Footer.jsx
+            ├── Hero.css
+            ├── Hero.jsx
+            ├── Loader.css
+            ├── Loader.jsx
+            ├── Navbar.css
+            ├── Navbar.jsx
+            ├── Projects.css
+            ├── Projects.jsx
+            ├── Skills.css
+            ├── Skills.jsx
+        └── 📁data
+            ├── mock.js
+        └── 📁hook
+            ├── useNavbarTypewriter.js
+            ├── useTypewriter.js
+        └── 📁pages
+            ├── Portfolio.jsx
+        ├── App.css
+        ├── App.jsx
+        ├── main.jsx
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── README.md
+    └── vite.config.js
+```
