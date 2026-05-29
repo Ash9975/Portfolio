@@ -8,6 +8,7 @@ export const useNavbarTypewriter = () => {
   const messages = [
     "Hello, World..",
     "I’m Ashish...",
+    "Welcome to my portfolio!"
   ];
 
   useEffect(() => {
