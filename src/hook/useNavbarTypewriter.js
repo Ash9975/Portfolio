@@ -30,6 +30,14 @@ export const useNavbarTypewriter = () => {
       }, 1200); // pause duration
     }
 
+    else if (step === 1) {
+      timeout = setTimeout(() => {
+        setIndex(0);
+        setText("");
+        setStep(2);
+      }, 1200);
+    }
+
     return () => clearTimeout(timeout);
   }, [index, step]);
 
