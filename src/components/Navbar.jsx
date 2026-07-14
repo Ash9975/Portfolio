@@ -1,60 +1,112 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { useNavbarTypewriter } from "../hook/useNavbarTypewriter";
-import './Navbar.css';
+import React, { useEffect, useState } from "react";
+import { Menu, X, Download } from "lucide-react";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const typedText = useNavbarTypewriter();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
+
+    setIsOpen(false);
   };
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => scrollToSection('hero')}>
-          <span className="typing-text">{typedText}</span>
-        </div>
 
-        <div className="navbar-links desktop-menu">
-          <button onClick={() => scrollToSection('about')} className="nav-link">About</button>
-          <button onClick={() => scrollToSection('projects')} className="nav-link">Projects</button>
-          <button onClick={() => scrollToSection('skills')} className="nav-link">Skills</button>
-          <button onClick={() => scrollToSection('contact')} className="nav-link">Contact</button>
-        </div>
-
-        <button
-          className="mobile-menu-button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        <div
+          className="navbar-logo"
+          onClick={() => scrollTo("hero")}
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          Ashish<span>.</span>
+        </div>
+
+        <div className="navbar-center">
+
+          <button onClick={() => scrollTo("about")}>
+            About
+          </button>
+
+          <button onClick={() => scrollTo("projects")}>
+            Projects
+          </button>
+
+          <button onClick={() => scrollTo("skills")}>
+            Skills
+          </button>
+
+          <button onClick={() => scrollTo("contact")}>
+            Contact
+          </button>
+
+        </div>
+
+        <div className="navbar-right">
+
+          <div className="nav-status">
+            <span></span>
+            Available
+          </div>
+
+          <a
+            href="../public/Ashish_Pimpalshende.pdf"
+            download
+            className="resume-btn"
+          >
+            <Download size={16} />
+            Resume
+          </a>
+
+          <button
+            className="menu-btn"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X /> : <Menu />}
+          </button>
+
+        </div>
+
       </div>
 
-      {isMobileMenuOpen && (
+      {isOpen && (
+
         <div className="mobile-menu">
-          <button onClick={() => scrollToSection('about')} className="mobile-nav-link">About</button>
-          <button onClick={() => scrollToSection('projects')} className="mobile-nav-link">Projects</button>
-          <button onClick={() => scrollToSection('skills')} className="mobile-nav-link">Skills</button>
-          <button onClick={() => scrollToSection('contact')} className="mobile-nav-link">Contact</button>
+
+          <button onClick={() => scrollTo("about")}>
+            About
+          </button>
+
+          <button onClick={() => scrollTo("projects")}>
+            Projects
+          </button>
+
+          <button onClick={() => scrollTo("skills")}>
+            Skills
+          </button>
+
+          <button onClick={() => scrollTo("contact")}>
+            Contact
+          </button>
+
         </div>
+
       )}
+
     </nav>
   );
 };

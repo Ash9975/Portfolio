@@ -38,11 +38,11 @@ const Hero = () => {
       </div>
 
       <div className="hero-content" ref={heroRef}>
-        {/* <div className="hero-profile-image"><img src={heroData.image} alt="" /></div> */}
-        <div className="hero-badge">Ashish Pimpalshende</div>
+
+        <div className="hero-badge">{heroData.name}</div>
 
         <h1 className="hero-title">
-          <span className="hero-title-line">MERN STACK DEVELOPER </span>
+          <span className="hero-title-line">{heroData.title}</span>
           <span className="hero-title-line highlight">BUILDING SCALABLE WEB APPS</span>
         </h1>
 
