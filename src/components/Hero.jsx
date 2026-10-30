@@ -124,11 +124,11 @@ const Hero = () => {
       />
 
       {/* ── Content wrapper ── */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col items-center px-5 pb-28 pt-36 text-center sm:px-8 md:px-10">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col items-center px-5 pb-20 pt-28 text-center sm:px-8 md:px-10 lg:pb-24 lg:pt-32">
 
         {/* ── Role pill ── */}
         <div
-          className="mb-10 inline-flex min-h-8 items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur-sm"
+          className="mb-8 inline-flex min-h-8 items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur-sm lg:mb-10"
           style={{ animationDelay: "0ms" }}
         >
           <span
@@ -152,7 +152,7 @@ const Hero = () => {
           {/* First name */}
           <span
             className="hero-name-line block"
-            style={{ fontSize: "clamp(3.5rem, 13vw, 11.5rem)" }}
+            style={{ fontSize: "clamp(3.5rem, 7.5vw, 8rem)" }}
           >
             {firstName}
           </span>
@@ -161,7 +161,7 @@ const Hero = () => {
           {lastName && (
             <span
               className="hero-name-line block"
-              style={{ fontSize: "clamp(3.5rem, 13vw, 11.5rem)" }}
+              style={{ fontSize: "clamp(3.5rem, 7.5vw, 8rem)" }}
             >
               {lastName}
               <span className="text-primary" aria-hidden="true">.</span>
@@ -171,7 +171,7 @@ const Hero = () => {
 
         {/* ── Horizontal divider ── */}
         <div
-          className="hero-divider my-9 flex w-full max-w-[680px] items-center gap-4 sm:my-11"
+          className="hero-divider my-7 flex w-full max-w-[680px] items-center gap-4 sm:my-8 lg:my-9"
           aria-hidden="true"
         >
           <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-white/15" />
@@ -181,8 +181,8 @@ const Hero = () => {
 
         {/* ── Tagline ── */}
         <p
-          className="hero-tagline mx-auto mb-12 max-w-[580px] px-2 font-sans font-normal leading-[1.72] tracking-[-0.015em] text-white/50 sm:mb-14"
-          style={{ fontSize: "clamp(0.95rem, 1.9vw, 1.2rem)" }}
+          className="hero-tagline mx-auto mb-10 max-w-[560px] px-2 font-sans font-normal leading-[1.72] tracking-[-0.015em] text-white/50 sm:mb-11 lg:mb-12"
+          style={{ fontSize: "clamp(0.92rem, 1.4vw, 1.1rem)" }}
         >
           {heroData.tagline}
         </p>
@@ -212,7 +212,7 @@ const Hero = () => {
         </div>
 
         {/* ── Social links ── */}
-        <div className="hero-social mt-11 flex items-center justify-center gap-6">
+        <div className="hero-social mt-9 flex items-center justify-center gap-6 lg:mt-11">
           <a
             href="https://github.com/Ash9975"
             target="_blank"
