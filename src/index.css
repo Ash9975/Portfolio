@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply overflow-x-hidden overscroll-none bg-ink-950 font-sans text-white antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #e23636;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff4444;
+  }
+}
+
+@layer components {
+  /* ── Projects ───────────────────────────────────────────── */
+
+  /*
+   * Project card base — structural + hover-lift.
+   * 'group' must be added directly in JSX (Tailwind v3 @apply restriction).
+   * Per-card accent color is set via --project-color CSS custom property
+   * on the card root element so all colour references derive from one point.
+   */
+  .project-card {
+    @apply relative overflow-hidden
+           border border-white/5 bg-white/[0.02]
+           transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]
+           hover:-translate-y-2 hover:border-primary/30
+           hover:shadow-[0_20px_60px_rgba(226,54,54,0.15)];
+  }
+
+  /* ── Contact ────────────────────────────────────────────── */
+
+  /* Social / contact link rows (email, GitHub, LinkedIn, Instagram) */
+  .contact-social-link {
+    @apply flex items-center gap-4 rounded-lg
+           border border-primary/10 bg-primary/5
+           p-4 text-white/80 no-underline
+           transition-all duration-300
+           hover:translate-x-[5px] hover:border-primary
+           hover:bg-primary/10 hover:text-primary
+           hover:shadow-[0_5px_20px_rgba(226,54,54,0.2)]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+
+  /* Shared input / textarea base — touch-friendly (min 44px height via py-3.5) */
+  .contact-input {
+    @apply w-full rounded-lg border border-white/10 bg-white/5
+           px-4 py-3.5 text-base text-white
+           outline-none
+           transition-all duration-300
+           placeholder:text-white/40
+           focus-visible:border-primary focus-visible:bg-primary/5
+           focus-visible:shadow-[0_0_0_3px_rgba(226,54,54,0.12)];
+  }
+
+  /* Form field label */
+  .contact-label {
+    @apply text-[0.85rem] font-semibold uppercase tracking-[1px] text-white/80;
+  }
+
+  /* ── Skills ─────────────────────────────────────────────── */
+
+  /*
+   * Skill card base — structural + hover-lift styles.
+   * The before: shimmer sweep and icon ring after: pseudo-elements
+   * are kept inline in Skills.jsx because Tailwind v3 @apply does not
+   * support chained pseudo-element variants (before:transition-[left], etc.)
+   */
+  .skill-card {
+    /* 'group' cannot be used inside @apply (Tailwind v3 restriction).
+       Add 'group' directly on the element in JSX instead. */
+    @apply relative overflow-hidden
+           border border-white/5 bg-white/[0.02]
+           p-5 text-center
+           transition-all duration-300
+           hover:-translate-y-[6px] hover:border-primary/50
+           hover:shadow-[0_15px_40px_rgba(226,54,54,0.2)]
+           md:p-7;
+  }
+
+  /* ── About ──────────────────────────────────────────────── */
+
+  /* Stat card — hover-lift card used in the About stats grid */
+  .stat-card {
+    @apply cursor-default border border-primary/20 bg-primary/5
+           px-6 py-8 text-center
+           transition-all duration-300
+           hover:-translate-y-[5px] hover:border-primary hover:bg-primary/10
+           hover:shadow-[0_10px_30px_rgba(226,54,54,0.2)]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+
+  /* ── Footer ─────────────────────────────────────────────── */
+
+  /* Repeated social icon circle buttons */
+  .footer-social-icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-full
+           border border-primary/20 bg-primary/10 text-white/70 no-underline
+           transition-all duration-300
+           hover:-translate-y-[3px] hover:border-primary hover:bg-primary/20
+           hover:text-primary hover:shadow-[0_5px_15px_rgba(226,54,54,0.3)]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+
+  /* Repeated footer quick-links */
+  .footer-nav-link {
+    @apply inline-block text-[0.95rem] text-white/70 no-underline
+           transition-all duration-300
+           hover:pl-2 hover:text-primary
+           focus-visible:outline-none focus-visible:rounded-sm
+           focus-visible:ring-2 focus-visible:ring-primary
+           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+
+  /* ── Navbar ──────────────────────────────────────────────── */
+  /* Navbar glassmorphism container */
+  .nav-glass {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(240, 44, 44, 0.219) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240, 44, 44, 0.152) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 30s linear infinite;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.75) 60%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.75) 60%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* ── Reduced-motion overrides ────────────────────────────────────────────── */
+/*
+ * Respects the OS-level "reduce motion" preference.
+ * Collapses all Tailwind keyframe animations to a simple opacity fade
+ * and disables the infinite grid / scrollBounce motions entirely.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep the grid bg visible but static */
+  .hero-grid-bg {
+    animation: none;
+  }
+}

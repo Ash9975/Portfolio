@@ -1,46 +1,62 @@
 import React from "react";
 import { aboutData } from "../data/mock";
-import "./About.css";
+import SectionHeading from "./SectionHeading";
+import HighlightQuote from "./HighlightQuote";
 
+/* ── Stat Card ──────────────────────────────────────────────────────────── */
 const StatCard = ({ stat }) => (
   <div className="stat-card">
-    <div className="stat-value">{stat.value}</div>
-    <div className="stat-label">{stat.label}</div>
+    {/* Large display value */}
+    <div className="mb-2 font-display text-[3rem] leading-none text-primary">
+      {stat.value}
+    </div>
+    {/* Label */}
+    <div className="text-[0.9rem] uppercase tracking-[1px] text-white/70">
+      {stat.label}
+    </div>
   </div>
 );
 
+/* ── About Section ──────────────────────────────────────────────────────── */
 const About = () => {
-  const statsElements = [];
-  for (let i = 0; i < aboutData.stats.length; i++) {
-    statsElements.push(
-      <StatCard key={i} stat={aboutData.stats[i]} />
-    );
-  }
-
   return (
-    <section id="about" className="about-section">
-      <div className="about-container">
-        <div className="section-header">
-          <h2 className="section-title">
-            <span className="title-number">01.</span>
-            ABOUT ME
-          </h2>
-          <div className="title-line"></div>
-        </div>
+    <section
+      id="about"
+      className={[
+        /* Base layout */
+        "relative bg-ink-950 px-6 py-16 md:px-8 md:py-24",
+        /* Subtle radial glow in the top-right corner */
+        "before:pointer-events-none before:absolute before:right-0 before:top-0",
+        "before:h-full before:w-2/5",
+        "before:bg-[radial-gradient(circle_at_100%_50%,rgba(226,54,54,0.05)_0%,transparent_70%)]",
+        "before:content-['']",
+      ].join(" ")}
+    >
+      <div className="relative z-[1] mx-auto max-w-container">
+        <SectionHeading number="01." title="ABOUT ME" />
 
-        <div className="about-content">
-          <div className="about-text">
-            <p className="about-description">{aboutData.description}</p>
+        <div className="grid grid-cols-1 gap-10 md:gap-14">
 
-            <div className="about-highlight">
-              <div className="highlight-bar"></div>
-              <p className="highlight-text">
-                “I enjoy building clean, practical solutions and continuously improving how I write and structure code.”
-              </p>
-            </div>
+          {/* ── Bio + Quote ── */}
+          <div className="flex flex-col gap-7">
+            <p className="text-base leading-[1.8] text-white/80 md:text-[1.2rem]">
+              {aboutData.description}
+            </p>
+
+            <HighlightQuote
+              className="mt-2"
+              text="\u201cI enjoy building clean, practical solutions and continuously improving how I write and structure code.\u201d"
+            />
           </div>
 
-          <div className="about-stats">{statsElements}</div>
+          {/* ── Stats grid ── */}
+          {/* Mobile: 2-col | md+: auto-fit ≥150px cols (4 per row) */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+            {aboutData.stats.map((stat, i) => (
+              <StatCard key={i} stat={stat} />
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
+const messages = [
+  "Hello, World..",
+  "I’m Ashish...",
+  "Welcome to my portfolio!",
+];
+
 export const useNavbarTypewriter = () => {
   const [text, setText] = useState("");
   const [step, setStep] = useState(0);
   const [index, setIndex] = useState(0);
-
-  const messages = [
-    "Hello, World..",
-    "I’m Ashish...",
-    "Welcome to my portfolio!"
-  ];
 
   useEffect(() => {
     let timeout;

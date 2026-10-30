@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Projects from '../components/Projects';
@@ -8,14 +8,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Portfolio = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   return (
-    <div className={`portfolio-container ${isLoaded ? 'loaded' : ''}`}>
+    <div>
       <Navbar />
       <Hero />
       <About />
