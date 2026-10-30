@@ -110,7 +110,7 @@ const Hero = () => {
         <img
           src={heroData.image}
           alt="Ashish Pimpalshende"
-          className="absolute bottom-0 left-0 top-[6%] h-full w-full object-cover opacity-90 [transform:translateZ(0)] contrast-[1.03] grayscale-[95%] will-change-transform md:left-[5%] md:top-auto md:h-[98vh] md:w-auto"
+          className="absolute bottom-0 left-0 top-[6%] h-full w-full object-cover opacity-90 [transform:translateZ(0)] contrast-[1.03] grayscale-[95%] will-change-transform md:left-[5%] md:top-auto md:h-[98vh] md:w-auto lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 lg:h-[90vh] lg:max-h-full lg:object-top"
         />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.97)_0%,rgba(0,0,0,0.3)_20%,rgba(0,0,0,0.8)_30%,rgba(0,0,0,0.72)_65%,rgba(0,0,0,0.7)_75%,rgba(0,0,0,0.28)_100%)]" />
       </div>
