@@ -39,7 +39,7 @@ const ProjectCard = ({ project, index }) => {
 
         {/* Status badge — only shown for "In Progress" */}
         {isInProgress && (
-          <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.6px] text-yellow-400 backdrop-blur-sm">
+          <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/75 px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.6px] text-yellow-400 backdrop-blur-sm">
             <Clock size={11} />
             In Progress
           </div>
@@ -52,7 +52,7 @@ const ProjectCard = ({ project, index }) => {
           {project.title}
         </h3>
 
-        <p className="text-[0.95rem] leading-[1.6] text-white/70">
+        <p className="text-[0.95rem] leading-[1.6] text-[#A1A1AA]">
           {project.description}
         </p>
 
@@ -102,7 +102,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative bg-gradient-to-b from-ink-950 to-ink-900 px-6 py-16 md:px-8 md:py-24"
+      className="relative bg-black px-6 py-16 md:px-8 md:py-24"
     >
       <div className="mx-auto max-w-container">
         <SectionHeading number="02." title="PROJECTS" />

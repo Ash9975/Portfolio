@@ -120,7 +120,7 @@ const SkillCard = ({ skill, index }) => {
         aria-valuemax={100}
       >
         <div
-          className="relative h-full rounded-full bg-gradient-to-r from-primary to-gold transition-[width] duration-1000 ease-out"
+          className="relative h-full rounded-full bg-gradient-to-r from-primary to-primary-coral transition-[width] duration-1000 ease-out"
           style={{ width: `${barWidth}%` }}
         >
           {/* Glow dot at the leading edge */}
@@ -137,12 +137,12 @@ const Skills = () => {
     <section
       id="skills"
       className={[
-        "relative overflow-hidden bg-ink-950 px-6 py-16 md:px-8 md:py-24",
+        "relative overflow-hidden bg-black px-6 py-16 md:px-8 md:py-24",
         /* Central radial glow */
         "before:pointer-events-none before:absolute before:left-1/2 before:top-1/2",
         "before:h-[600px] before:w-[600px]",
         "before:-translate-x-1/2 before:-translate-y-1/2",
-        "before:bg-[radial-gradient(circle,rgba(226,54,54,0.08)_0%,transparent_70%)]",
+        "before:bg-[radial-gradient(circle,rgba(226,54,54,0.05)_0%,transparent_70%)]",
         "before:content-['']",
       ].join(" ")}
     >

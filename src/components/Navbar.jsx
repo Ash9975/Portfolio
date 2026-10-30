@@ -115,7 +115,7 @@ const Navbar = () => {
                 after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:transition-all after:duration-300
                 ${activeId === id
                   ? "text-white after:w-full after:bg-primary"
-                  : "text-[#a0a0a0] after:w-0 after:bg-white hover:text-white hover:after:w-full"
+                  : "text-[#A1A1AA] after:w-0 after:bg-primary/70 hover:text-white hover:after:w-full"
                 }`}
             >
               {label}
@@ -166,7 +166,7 @@ const Navbar = () => {
           isOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="mt-2.5 flex flex-col rounded-[18px] border border-white/[0.08] bg-[rgba(10,10,10,0.96)] px-5 py-4 shadow-[0_16px_48px_rgba(0,0,0,0.5)] backdrop-blur-[20px]">
+        <div className="mt-2.5 flex flex-col rounded-[18px] border border-white/[0.07] bg-[rgba(0,0,0,0.96)] px-5 py-4 shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-[24px]">
           {/* Nav links */}
           <div className="flex flex-col">
             {NAV_LINKS.map(({ id, label }) => (
@@ -176,7 +176,7 @@ const Navbar = () => {
                 className={`flex items-center gap-3 border-none bg-transparent py-3.5 text-left text-[1rem] font-medium transition-all duration-200 ${
                   activeId === id
                     ? "translate-x-2 text-primary"
-                    : "text-white/80 hover:translate-x-2 hover:text-primary-coral"
+                    : "text-white/70 hover:translate-x-2 hover:text-white"
                 }`}
               >
                 <span

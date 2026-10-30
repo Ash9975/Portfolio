@@ -8,7 +8,8 @@
   }
 
   body {
-    @apply overflow-x-hidden overscroll-none bg-ink-950 font-sans text-white antialiased;
+    /* Pure black primary background (#000000 via ink-950 remap) */
+    @apply overflow-x-hidden overscroll-none bg-black font-sans text-white antialiased;
   }
 
   ::-webkit-scrollbar {
@@ -16,7 +17,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #000000;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -40,10 +41,10 @@
    */
   .project-card {
     @apply relative overflow-hidden
-           border border-white/5 bg-white/[0.02]
+           border border-white/[0.06] bg-[#0A0A0A]
            transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]
-           hover:-translate-y-2 hover:border-primary/30
-           hover:shadow-[0_20px_60px_rgba(226,54,54,0.15)];
+           hover:-translate-y-2 hover:border-primary/25
+           hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)];
   }
 
   /* ── Contact ────────────────────────────────────────────── */
@@ -51,30 +52,29 @@
   /* Social / contact link rows (email, GitHub, LinkedIn, Instagram) */
   .contact-social-link {
     @apply flex items-center gap-4 rounded-lg
-           border border-primary/10 bg-primary/5
-           p-4 text-white/80 no-underline
+           border border-white/[0.06] bg-[#0A0A0A]
+           p-4 text-white/70 no-underline
            transition-all duration-300
-           hover:translate-x-[5px] hover:border-primary
-           hover:bg-primary/10 hover:text-primary
-           hover:shadow-[0_5px_20px_rgba(226,54,54,0.2)]
+           hover:translate-x-[4px] hover:border-primary/40
+           hover:bg-[#141414] hover:text-white
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+           focus-visible:ring-offset-2 focus-visible:ring-offset-black;
   }
 
   /* Shared input / textarea base — touch-friendly (min 44px height via py-3.5) */
   .contact-input {
-    @apply w-full rounded-lg border border-white/10 bg-white/5
+    @apply w-full rounded-lg border border-white/[0.08] bg-[#0A0A0A]
            px-4 py-3.5 text-base text-white
            outline-none
            transition-all duration-300
-           placeholder:text-white/40
-           focus-visible:border-primary focus-visible:bg-primary/5
-           focus-visible:shadow-[0_0_0_3px_rgba(226,54,54,0.12)];
+           placeholder:text-white/30
+           focus-visible:border-primary focus-visible:bg-[#141414]
+           focus-visible:shadow-[0_0_0_3px_rgba(226,54,54,0.10)];
   }
 
   /* Form field label */
   .contact-label {
-    @apply text-[0.85rem] font-semibold uppercase tracking-[1px] text-white/80;
+    @apply text-[0.85rem] font-semibold uppercase tracking-[1px] text-white/60;
   }
 
   /* ── Skills ─────────────────────────────────────────────── */
@@ -89,11 +89,12 @@
     /* 'group' cannot be used inside @apply (Tailwind v3 restriction).
        Add 'group' directly on the element in JSX instead. */
     @apply relative overflow-hidden
-           border border-white/5 bg-white/[0.02]
+           border border-white/[0.06] bg-[#0A0A0A]
            p-5 text-center
            transition-all duration-300
-           hover:-translate-y-[6px] hover:border-primary/50
-           hover:shadow-[0_15px_40px_rgba(226,54,54,0.2)]
+           hover:-translate-y-[5px] hover:border-primary/35
+           hover:bg-[#141414]
+           hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)]
            md:p-7;
   }
 
@@ -101,13 +102,13 @@
 
   /* Stat card — hover-lift card used in the About stats grid */
   .stat-card {
-    @apply cursor-default border border-primary/20 bg-primary/5
+    @apply cursor-default border border-primary/15 bg-[#0A0A0A]
            px-6 py-8 text-center
            transition-all duration-300
-           hover:-translate-y-[5px] hover:border-primary hover:bg-primary/10
-           hover:shadow-[0_10px_30px_rgba(226,54,54,0.2)]
+           hover:-translate-y-[4px] hover:border-primary/40 hover:bg-[#141414]
+           hover:shadow-[0_8px_24px_rgba(0,0,0,0.5)]
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+           focus-visible:ring-offset-2 focus-visible:ring-offset-black;
   }
 
   /* ── Footer ─────────────────────────────────────────────── */
@@ -115,55 +116,56 @@
   /* Repeated social icon circle buttons */
   .footer-social-icon {
     @apply flex h-10 w-10 items-center justify-center rounded-full
-           border border-primary/20 bg-primary/10 text-white/70 no-underline
+           border border-white/[0.08] bg-[#0A0A0A] text-white/50 no-underline
            transition-all duration-300
-           hover:-translate-y-[3px] hover:border-primary hover:bg-primary/20
-           hover:text-primary hover:shadow-[0_5px_15px_rgba(226,54,54,0.3)]
+           hover:-translate-y-[3px] hover:border-primary/50 hover:bg-[#141414]
+           hover:text-primary hover:shadow-[0_4px_12px_rgba(226,54,54,0.2)]
            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
-           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+           focus-visible:ring-offset-2 focus-visible:ring-offset-black;
   }
 
   /* Repeated footer quick-links */
   .footer-nav-link {
-    @apply inline-block text-[0.95rem] text-white/70 no-underline
+    @apply inline-block text-[0.95rem] text-white/50 no-underline
            transition-all duration-300
            hover:pl-2 hover:text-primary
            focus-visible:outline-none focus-visible:rounded-sm
            focus-visible:ring-2 focus-visible:ring-primary
-           focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+           focus-visible:ring-offset-2 focus-visible:ring-offset-black;
   }
 
   /* ── Navbar ──────────────────────────────────────────────── */
-  /* Navbar glassmorphism container */
+  /* Navbar pure-black glass container */
   .nav-glass {
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
+  /* ── Hero grid background ────────────────────────────────── */
   .hero-grid-bg {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(rgba(226, 54, 54, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(226, 54, 54, 0.07) 1px, transparent 1px);
+      linear-gradient(rgba(226, 54, 54, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(226, 54, 54, 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
     animation: gridMove 40s linear infinite;
     -webkit-mask-image: radial-gradient(
       ellipse 80% 70% at 50% 50%,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.6) 45%,
-      rgba(0, 0, 0, 0.15) 75%,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.1) 80%,
       transparent 100%
     );
     mask-image: radial-gradient(
       ellipse 80% 70% at 50% 50%,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.6) 45%,
-      rgba(0, 0, 0, 0.15) 75%,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.1) 80%,
       transparent 100%
     );
   }
@@ -199,6 +201,32 @@
     transform: translateY(100%);
     opacity: 0;
   }
+}
+
+/* ── Hero floating word drift keyframes ─────────────────────────────────── */
+/*
+ * Four independent drift paths used by FloatingWords.jsx.
+ * Very small movement — the visual feel is a slow, gentle float.
+ * alternate direction means each animation reverses smoothly.
+ */
+@keyframes heroWordFloat1 {
+  0%   { transform: translate(0px,   0px); }
+  100% { transform: translate(9px,  -7px); }
+}
+
+@keyframes heroWordFloat2 {
+  0%   { transform: translate(0px,   0px); }
+  100% { transform: translate(-8px,  8px); }
+}
+
+@keyframes heroWordFloat3 {
+  0%   { transform: translate(0px,   0px); }
+  100% { transform: translate(7px,   9px); }
+}
+
+@keyframes heroWordFloat4 {
+  0%   { transform: translate(0px,   0px); }
+  100% { transform: translate(-9px, -6px); }
 }
 
 /* ── Reduced-motion overrides ────────────────────────────────────────────── */

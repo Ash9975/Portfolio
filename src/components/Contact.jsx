@@ -30,7 +30,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative bg-gradient-to-b from-ink-900 to-ink-950 px-6 py-16 md:px-8 md:py-24"
+      className="relative bg-black px-6 py-16 md:px-8 md:py-24"
     >
       <div className="mx-auto max-w-container">
         <SectionHeading number="04." title="GET IN TOUCH" />
@@ -44,7 +44,7 @@ const Contact = () => {
               Let&apos;s Work Together
             </h3>
 
-            <p className="text-[1.05rem] leading-[1.75] text-white/70 md:text-[1.1rem]">
+            <p className="text-[1.05rem] leading-[1.75] text-[#A1A1AA] md:text-[1.1rem]">
               I&apos;m always open to discussing new ideas, projects, or learning
               opportunities. Whether you want to collaborate, build something from
               scratch, or just have a quick chat — feel free to reach out.
@@ -94,7 +94,7 @@ const Contact = () => {
           </div>
 
           {/* ── Right column: contact form ── */}
-          <div className="border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_10px_40px_rgba(226,54,54,0.1)] md:p-10">
+          <div className="border border-white/[0.06] bg-[#0A0A0A] p-6 transition-all duration-300 hover:border-white/10 hover:shadow-[0_10px_40px_rgba(0,0,0,0.5)] md:p-10">
             <form
               onSubmit={handleSubmit}
               className="flex flex-col gap-5"
@@ -156,7 +156,7 @@ const Contact = () => {
               {/* Submit */}
               <button
                 type="submit"
-                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-primary bg-primary px-8 py-4 text-base font-semibold uppercase tracking-[1px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-transparent hover:text-primary hover:shadow-[0_10px_30px_rgba(226,54,54,0.3)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 sm:w-auto"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-primary bg-primary px-8 py-4 text-base font-semibold uppercase tracking-[1px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-transparent hover:text-primary hover:shadow-[0_10px_30px_rgba(226,54,54,0.3)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:w-auto"
               >
                 <Send size={18} aria-hidden="true" />
                 <span>Send Message</span>

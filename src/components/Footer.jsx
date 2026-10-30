@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-primary/20 bg-ink-950 px-6 pb-8 pt-12 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#E23636,transparent)] before:content-[''] md:px-8 md:pt-16">
+    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-black px-6 pb-8 pt-12 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,rgba(226,54,54,0.5),transparent)] before:content-[''] md:px-8 md:pt-16">
       <div className="mx-auto max-w-container">
 
         {/* ── Three-column grid: brand / quick links / connect ── */}
@@ -14,10 +14,10 @@ const Footer = () => {
 
           {/* Brand column */}
           <div className="flex flex-col items-center gap-4 md:col-span-2 md:items-start lg:col-span-1">
-            <h3 className="m-0 bg-[linear-gradient(135deg,#E23636_0%,#FFD700_100%)] bg-clip-text font-display text-[1.8rem] tracking-[2px] text-transparent">
+            <h3 className="m-0 bg-[linear-gradient(135deg,#E23636_0%,#FF684A_100%)] bg-clip-text font-display text-[1.8rem] tracking-[2px] text-transparent">
               ASHISH PIMPALSHENDE
             </h3>
-            <p className="max-w-[300px] text-[0.95rem] leading-[1.6] text-white/60 md:max-w-none">
+            <p className="max-w-[300px] text-[0.95rem] leading-[1.6] text-[#666666] md:max-w-none">
               Full-stack developer focused on building clean, user-friendly web experiences.
             </p>
           </div>
@@ -81,7 +81,7 @@ const Footer = () => {
 
         {/* ── Bottom copyright bar ── */}
         <div className="border-t border-white/5 pt-8 text-center">
-          <p className="flex flex-col items-center gap-1 text-[0.9rem] text-white/50 md:flex-row md:justify-center md:gap-2">
+          <p className="flex flex-col items-center gap-1 text-[0.9rem] text-[#666666] md:flex-row md:justify-center md:gap-2">
             © {currentYear} Ashish Pimpalshende. Built with React &amp; passion for clean UI.
           </p>
         </div>

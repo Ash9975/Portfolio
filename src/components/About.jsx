@@ -24,11 +24,11 @@ const About = () => {
       id="about"
       className={[
         /* Base layout */
-        "relative bg-ink-950 px-6 py-16 md:px-8 md:py-24",
+        "relative bg-black px-6 py-16 md:px-8 md:py-24",
         /* Subtle radial glow in the top-right corner */
         "before:pointer-events-none before:absolute before:right-0 before:top-0",
         "before:h-full before:w-2/5",
-        "before:bg-[radial-gradient(circle_at_100%_50%,rgba(226,54,54,0.05)_0%,transparent_70%)]",
+        "before:bg-[radial-gradient(circle_at_100%_50%,rgba(226,54,54,0.04)_0%,transparent_70%)]",
         "before:content-['']",
       ].join(" ")}
     >
@@ -39,7 +39,7 @@ const About = () => {
 
           {/* ── Bio + Quote ── */}
           <div className="flex flex-col gap-7">
-            <p className="text-base leading-[1.8] text-white/80 md:text-[1.2rem]">
+            <p className="text-base leading-[1.8] text-white/70 md:text-[1.2rem]">
               {aboutData.description}
             </p>
 
