@@ -23,13 +23,14 @@ export default {
         container: "1400px",
       },
       animation: {
-        "grid-move": "gridMove 30s linear infinite",
+        "grid-move": "gridMove 40s linear infinite",
         "hero-fade": "heroFadeIn 1s ease-out",
         "title-slide": "titleSlideIn 0.8s ease-out",
         "title-slide-delayed": "titleSlideIn 0.8s ease-out 0.2s backwards",
         "subtitle-fade": "subtitleFadeIn 1s ease-out 0.4s backwards",
         "cta-fade": "ctaFadeIn 1s ease-out 0.6s backwards",
         "scroll-bounce": "scrollBounce 2s ease-in-out infinite",
+        "scroll-line": "scrollLineDrop 2s ease-in-out infinite",
         "project-fade": "projectFadeIn 0.6s ease-out backwards",
         "border-pulse": "borderPulse 1.5s ease-in-out infinite",
         "skill-fade": "skillFadeIn 0.5s ease-out backwards",
@@ -80,6 +81,12 @@ export default {
         barGlow: {
           "0%, 100%": { opacity: "0.5" },
           "50%": { opacity: "1" },
+        },
+        scrollLineDrop: {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "20%": { opacity: "1" },
+          "80%": { opacity: "1" },
+          "100%": { transform: "translateY(100%)", opacity: "0" },
         },
       },
     },

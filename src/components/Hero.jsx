@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { heroData } from "../data/mock";
 import { ArrowDown, Github, Linkedin } from "lucide-react";
 
-/* ── Role cycling typewriter ────────────────────────────── */
 const ROLES = [
   "FULL STACK DEVELOPER",
   "MERN STACK ENGINEER",
@@ -10,230 +10,248 @@ const ROLES = [
   "API ARCHITECT",
 ];
 
+/* ── Role cycling typewriter ─────────────────────────── */
+
 function useRoleCycle() {
-  // Single state object avoids multiple synchronous setState calls inside effects
   const [state, setState] = useState({
     roleIdx: 0,
     displayed: "",
-    phase: "typing", // "typing" | "pause" | "erasing"
+    phase: "typing",
   });
+
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   const { roleIdx, displayed, phase } = state;
 
   useEffect(() => {
+    if (reducedMotion) {
+      if (displayed !== ROLES[0] || roleIdx !== 0 || phase !== "pause") {
+        setState({ roleIdx: 0, displayed: ROLES[0], phase: "pause" });
+      }
+      return;
+    }
+
     const target = ROLES[roleIdx];
     let timeout;
 
     if (phase === "typing") {
       if (displayed.length < target.length) {
-        timeout = setTimeout(
-          () =>
-            setState((s) => ({
-              ...s,
-              displayed: target.slice(0, s.displayed.length + 1),
-            })),
-          55
-        );
+        timeout = setTimeout(() => {
+          setState((s) => ({
+            ...s,
+            displayed: target.slice(0, s.displayed.length + 1),
+          }));
+        }, 65);
       } else {
-        timeout = setTimeout(
-          () => setState((s) => ({ ...s, phase: "pause" })),
-          2000
-        );
+        timeout = setTimeout(() => {
+          setState((s) => ({ ...s, phase: "pause" }));
+        }, 2200);
       }
     } else if (phase === "pause") {
-      timeout = setTimeout(
-        () => setState((s) => ({ ...s, phase: "erasing" })),
-        400
-      );
+      timeout = setTimeout(() => {
+        setState((s) => ({ ...s, phase: "erasing" }));
+      }, 400);
+    } else if (displayed.length > 0) {
+      timeout = setTimeout(() => {
+        setState((s) => ({ ...s, displayed: s.displayed.slice(0, -1) }));
+      }, 30);
     } else {
-      // erasing
-      if (displayed.length > 0) {
-        timeout = setTimeout(
-          () =>
-            setState((s) => ({ ...s, displayed: s.displayed.slice(0, -1) })),
-          30
-        );
-      } else {
-        // Advance to next role — single setState call
-        timeout = setTimeout(
-          () =>
-            setState((s) => ({
-              roleIdx: (s.roleIdx + 1) % ROLES.length,
-              displayed: "",
-              phase: "typing",
-            })),
-          0
-        );
-      }
+      timeout = setTimeout(() => {
+        setState((s) => ({
+          roleIdx: (s.roleIdx + 1) % ROLES.length,
+          displayed: "",
+          phase: "typing",
+        }));
+      }, 0);
     }
 
     return () => clearTimeout(timeout);
-  }, [displayed, phase, roleIdx]);
+  }, [displayed, phase, roleIdx, reducedMotion]);
 
   return displayed;
 }
 
-/* ── Component ──────────────────────────────────────────── */
+/* ── Hero Section ────────────────────────────────────── */
+
 const Hero = () => {
-  const parallaxRef = useRef(null);
   const role = useRoleCycle();
 
-  /* Parallax on the text content only — skipped when reduced motion is preferred */
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const nameParts = (heroData.name || "").trim().split(/\s+/);
+  const firstName = nameParts[0] || "";
+  const lastName = nameParts.slice(1).join(" ");
 
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        if (parallaxRef.current) {
-          parallaxRef.current.style.transform = `translateY(${window.scrollY * 0.18}px)`;
-        }
-        ticking = false;
-      });
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const scrollTo = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  };
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen min-w-full items-center justify-end overflow-hidden bg-ink-950 px-6 pb-12 pt-20 md:px-8 md:pb-16 md:pt-24"
+      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-ink-950"
     >
-      {/* Animated grid background */}
-      <div className="hero-grid-bg animate-grid-move" aria-hidden="true" />
-
-      {/* Portrait + gradient overlay */}
-      <div className="absolute inset-0 z-[1]" aria-hidden="true">
-        <img
-          src={heroData.image}
-          alt="Ashish Pimpalshende"
-          className="absolute bottom-0 left-0 top-[6%] h-full w-full object-cover opacity-90 [transform:translateZ(0)] contrast-[1.03] grayscale-[95%] will-change-transform md:left-[5%] md:top-auto md:h-[98vh] md:w-auto lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 lg:h-[115vh] lg:max-h-[115vh] lg:object-top"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.97)_0%,rgba(0,0,0,0.3)_20%,rgba(0,0,0,0.8)_30%,rgba(0,0,0,0.72)_65%,rgba(0,0,0,0.7)_75%,rgba(0,0,0,0.28)_100%)]" />
-      </div>
-
-      {/* Ambient accent glow */}
+      {/* ── Background grid ── */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1]"
+        className="hero-grid-bg pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
+
+      {/* ── Radial vignette overlay ── */}
+      <div
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 55% at 80% 20%, rgba(255,215,0,0.04) 0%, transparent 60%)",
+            "radial-gradient(ellipse 70% 55% at 50% 50%, transparent 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.97) 100%)",
         }}
         aria-hidden="true"
       />
 
-      {/* ── Text content ──────────────────────────────────────── */}
+      {/* ── Ambient glow ── */}
       <div
-        ref={parallaxRef}
-        className="relative z-[2] m-4 flex max-w-[1200px] flex-col items-center justify-center text-center animate-hero-fade md:m-10 md:items-end md:text-right"
-      >
-        {/* Name badge */}
-        <div className="mb-5 inline-block rounded-[50px] border border-primary bg-primary/10 px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[3px] text-primary opacity-80 sm:text-xs">
-          {heroData.name}
-        </div>
+        className="pointer-events-none absolute left-1/2 top-[45%] h-[480px] w-[800px] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.04] blur-[130px]"
+        aria-hidden="true"
+      />
 
-        {/* Main title */}
-        <h1 className="mb-4 font-display leading-none text-[clamp(2.6rem,9vw,6.8rem)]">
-          <span className="block animate-title-slide tracking-[0.04em] text-white">
-            BUILDING
-          </span>
-          <span className="block animate-title-slide-delayed tracking-[0.04em] text-white">
-            SCALABLE
-          </span>
+      {/* ── Content wrapper ── */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col items-center px-5 pb-28 pt-36 text-center sm:px-8 md:px-10">
+
+        {/* ── Role pill ── */}
+        <div
+          className="mb-10 inline-flex min-h-8 items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur-sm"
+          style={{ animationDelay: "0ms" }}
+        >
           <span
-            className="block animate-[titleSlideIn_0.8s_ease-out_0.4s_backwards] tracking-[0.04em]"
-            style={{
-              background: "linear-gradient(135deg, #E23636 0%, #ff8c00 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            WEB APPS
-          </span>
-        </h1>
-
-        {/* Typewriter role */}
-        <div className="mb-6 flex items-center justify-center gap-2 md:justify-end">
-          <span className="font-sans text-[clamp(0.85rem,2vw,1.1rem)] font-medium tracking-[0.22em] text-white/60 animate-subtitle-fade">
+            className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+            aria-hidden="true"
+          />
+          <span className="min-w-[220px] text-left font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/60 sm:text-[0.72rem] sm:tracking-[0.22em]">
             {role}
           </span>
-          <span className="inline-block h-[1.1em] w-[2px] animate-[barGlow_0.8s_ease-in-out_infinite] bg-primary" />
+          <span
+            className="h-3.5 w-[1.5px] animate-[barGlow_0.8s_ease-in-out_infinite] bg-primary/80"
+            aria-hidden="true"
+          />
         </div>
 
-        {/* Tagline */}
-        <p className="mb-10 max-w-[580px] text-[clamp(0.92rem,1.8vw,1.15rem)] font-normal leading-[1.75] tracking-[0.01em] text-white/[0.72] animate-subtitle-fade md:mb-14">
+        {/* ── Main headline ── */}
+        <h1
+          className="mb-0 flex w-full flex-col items-center font-sans font-black leading-[0.87] tracking-[-0.06em] text-white"
+          aria-label={heroData.name}
+        >
+          {/* First name */}
+          <span
+            className="hero-name-line block"
+            style={{ fontSize: "clamp(3.5rem, 13vw, 11.5rem)" }}
+          >
+            {firstName}
+          </span>
+
+          {/* Last name + accent dot */}
+          {lastName && (
+            <span
+              className="hero-name-line block"
+              style={{ fontSize: "clamp(3.5rem, 13vw, 11.5rem)" }}
+            >
+              {lastName}
+              <span className="text-primary" aria-hidden="true">.</span>
+            </span>
+          )}
+        </h1>
+
+        {/* ── Horizontal divider ── */}
+        <div
+          className="hero-divider my-9 flex w-full max-w-[680px] items-center gap-4 sm:my-11"
+          aria-hidden="true"
+        >
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-white/15" />
+          <span className="h-1 w-1 rounded-full bg-primary/60" />
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent via-white/15 to-white/15" />
+        </div>
+
+        {/* ── Tagline ── */}
+        <p
+          className="hero-tagline mx-auto mb-12 max-w-[580px] px-2 font-sans font-normal leading-[1.72] tracking-[-0.015em] text-white/50 sm:mb-14"
+          style={{ fontSize: "clamp(0.95rem, 1.9vw, 1.2rem)" }}
+        >
           {heroData.tagline}
         </p>
 
-        {/* CTA buttons */}
-        <div className="flex animate-cta-fade flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center md:gap-6">
+        {/* ── CTA buttons ── */}
+        <div className="hero-cta flex w-full flex-col items-center justify-center gap-3.5 sm:w-auto sm:flex-row sm:gap-4">
           <button
-            className="w-full max-w-[280px] cursor-pointer rounded-[50px] border-2 border-primary bg-primary px-9 py-3.5 text-[0.95rem] font-semibold uppercase tracking-[0.08em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-transparent hover:text-primary hover:shadow-[0_6px_24px_rgba(226,54,54,0.35)] sm:w-auto sm:max-w-none"
-            onClick={() =>
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            type="button"
+            onClick={() => scrollTo("projects")}
+            className="group relative flex min-h-[52px] w-full items-center justify-center overflow-hidden rounded-full bg-white px-10 py-3 font-sans text-[0.85rem] font-bold tracking-wide text-black transition-all duration-300 hover:-translate-y-[3px] hover:bg-primary hover:text-white hover:shadow-[0_12px_40px_rgba(226,54,54,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-ink-950 sm:w-auto"
           >
-            View Projects
+            <span className="relative z-10 flex items-center gap-2">
+              View Projects
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                ↗
+              </span>
+            </span>
           </button>
+
           <button
-            className="w-full max-w-[280px] cursor-pointer rounded-[50px] border-2 border-white/60 bg-transparent px-9 py-3.5 text-[0.95rem] font-semibold uppercase tracking-[0.08em] text-white/90 transition-all duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink-950 hover:shadow-[0_10px_30px_rgba(255,255,255,0.18)] sm:w-auto sm:max-w-none"
-            onClick={() =>
-              document
-                .getElementById("contact")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            type="button"
+            onClick={() => scrollTo("contact")}
+            className="flex min-h-[52px] w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-10 py-3 font-sans text-[0.85rem] font-medium tracking-wide text-white/65 backdrop-blur-sm transition-all duration-300 hover:-translate-y-[3px] hover:border-white/40 hover:bg-white/[0.07] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-ink-950 sm:w-auto"
           >
-            Contact Me
+            Get in touch →
           </button>
         </div>
 
-        {/* Quick social row (mobile: below buttons; md: inline) */}
-        <div className="mt-6 flex items-center justify-center gap-4 animate-cta-fade md:justify-end">
-          <span className="text-[0.72rem] uppercase tracking-[2px] text-white/30">
-            Find me on
-          </span>
+        {/* ── Social links ── */}
+        <div className="hero-social mt-11 flex items-center justify-center gap-6">
           <a
             href="https://github.com/Ash9975"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-300 hover:border-white/40 hover:text-white hover:-translate-y-0.5"
+            className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/40 transition-all duration-300 hover:-translate-y-[2px] hover:border-white/25 hover:bg-white/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            <Github size={15} />
+            <Github size={16} />
           </a>
+
+          <span className="h-px w-5 bg-white/12" aria-hidden="true" />
+
           <a
             href="https://www.linkedin.com/in/ashish-pimpalshende/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-300 hover:border-primary/60 hover:text-primary hover:-translate-y-0.5"
+            className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/40 transition-all duration-300 hover:-translate-y-[2px] hover:border-white/25 hover:bg-white/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            <Linkedin size={15} />
+            <Linkedin size={16} />
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* ── Scroll indicator ── */}
       <button
-        className="group absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 cursor-pointer flex-col items-center gap-1.5 border-none bg-transparent animate-scroll-bounce"
-        onClick={() =>
-          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
-        }
-        aria-label="Scroll to about"
+        type="button"
+        onClick={() => scrollTo("about")}
+        aria-label="Scroll to About section"
+        className="group absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/25 transition-colors duration-300 hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        <span className="text-[0.62rem] uppercase tracking-[2px] text-white/30 transition-colors duration-300 group-hover:text-white/60">
-          scroll
+        {/* Animated scroll track */}
+        <span
+          className="relative flex h-[38px] w-[1px] overflow-hidden bg-white/10"
+          aria-hidden="true"
+        >
+          <span className="hero-scroll-line absolute left-0 top-0 h-full w-full bg-gradient-to-b from-transparent via-white/60 to-transparent" />
         </span>
-        <ArrowDown
-          size={20}
-          className="text-primary transition-colors duration-300 group-hover:text-gold"
-        />
+        <span className="text-[0.58rem] uppercase tracking-[0.25em]">Scroll</span>
       </button>
     </section>
   );

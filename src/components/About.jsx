@@ -45,7 +45,7 @@ const About = () => {
 
             <HighlightQuote
               className="mt-2"
-              text="\u201cI enjoy building clean, practical solutions and continuously improving how I write and structure code.\u201d"
+              text="Enjoy building clean, practical solutions and continuously improving how I write and structure code."
             />
           </div>
 
